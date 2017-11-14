@@ -1,0 +1,1 @@
+# strong_weak_currency_movements
