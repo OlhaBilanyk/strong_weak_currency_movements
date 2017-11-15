@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(LOG_TAG, "1");
+
         tabs = (TabLayout) findViewById(R.id.tabs);
 //        tabs.setTabGravity(TabLayout.GRAVITY_FILL);
         pager = (ViewPager) findViewById(R.id.pager);
@@ -60,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
 //        textView = (TextView) findViewById(R.id.text);
         String httpsURL = "http://91.194.90.62:20019/fxservice/strongweak";//http://34.197.213.118:20019/fxservice/strongweak";
         tabs.setupWithViewPager(pager);
+
+
+        if (!Util.isOnline(this)) {
+            Util.showInforamtionAlterDialog(this, R.string.warning, R.string.no_internet);
+            return;
+        }
+
 
         alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 //        numberOfCallsPerWeekdays(null,null);
@@ -262,27 +270,32 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     void startNewService() {
-        Calendar cal = Calendar.getInstance();
-        PendingIntent pi;
-        Intent intent;
-        Intent si = new Intent();
-        pi = createPendingResult(1, si, 0);
-        intent = new Intent(this, DownloadServise.class)
-                .putExtra(PARAM_PINTENT, pi);
+        if (!Util.isOnline(this)) {
+            Util.showInforamtionAlterDialog(this, R.string.warning, R.string.no_internet);
+            return;
+        }
+        else {
+            Calendar cal = Calendar.getInstance();
+            PendingIntent pi;
+            Intent intent;
+            Intent si = new Intent();
+            pi = createPendingResult(1, si, 0);
+            intent = new Intent(this, DownloadServise.class)
+                    .putExtra(PARAM_PINTENT, pi);
 
 
-        startService(intent);
+            startService(intent);
 
-        pi = createPendingResult(1, si, 0);
+            pi = createPendingResult(1, si, 0);
 
-        Intent intent1 = new Intent(MainActivity.this, DownloadServise.class);
-        intent1.putExtra(PARAM_PINTENT, pi);
-        PendingIntent pintent = PendingIntent.getService(MainActivity.this, 0, intent1, PendingIntent.FLAG_CANCEL_CURRENT);
-
-
-        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),  INTERVAL , pintent);
+            Intent intent1 = new Intent(MainActivity.this, DownloadServise.class);
+            intent1.putExtra(PARAM_PINTENT, pi);
+            PendingIntent pintent = PendingIntent.getService(MainActivity.this, 0, intent1, PendingIntent.FLAG_CANCEL_CURRENT);
 
 
+            alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), INTERVAL, pintent);
+
+        }
     }
 
     @Override

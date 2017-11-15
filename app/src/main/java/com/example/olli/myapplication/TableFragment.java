@@ -29,6 +29,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class TableFragment extends Fragment {
+    private static String LOG_TAG = "TableFragment";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -92,10 +93,6 @@ public class TableFragment extends Fragment {
     }
 
     String[] row = {"TimeFrame",  "Strongest", "Weakest", "StrongWeakPair"};
-    String[] column = {"M15", "H1", "H4", "D1"};
-    int rl = row.length;
-    int cl = column.length;
-
     void rowForm(String s) {
         String strongWeak[] = getStrongWeakData(mParam1, s);
         setValue(s, strongWeak);
@@ -171,7 +168,6 @@ public class TableFragment extends Fragment {
         row3 = new TableRow(getActivity());
         row4 = new TableRow(getActivity());
 
-//        setValue(row[0], column);
         for (int k = 0; k < row.length; k++)
             rowForm(row[k]);
 
