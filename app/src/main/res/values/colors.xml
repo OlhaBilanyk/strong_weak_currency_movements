@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorPrimary">#00695C</color>
+
+    <color name="colorPrimaryDark">#004D40</color>
+
+    <color name="colorAccent">#0aa95c</color>
+
+    <color name="colorRow">#009688</color>
+
+    <color name="primary_two">#2E7D32</color>
+
+    <color name="primary_dark_two">#00695C</color>
+
+    <color name="accent_two">#1DE9B6</color>
+
+    <color name="float_btn">#1DE9B6</color>
+
+    <color name="image_items">#00796B</color>
+    <color name="bar_color">#34bf8e</color>
+    <color name="tab_color">#607D8B</color>
+
+
+    <color name="btnTextColor">#FFFFFF</color>
+</resources>
